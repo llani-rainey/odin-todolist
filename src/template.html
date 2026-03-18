@@ -1,3 +1,4 @@
+<!-- template.html -->
 <!doctype html>
 <html lang="en">
 
@@ -5,14 +6,93 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Llani's To-do List</title>
+   
 </head>
 
 <body>
-    <header>
+    <header class="header">
         <h1>To-do List</h1>
     </header>
 
-    <main id="content"></main>
+    <div id="app" class="app">
+        <!-- Sidebar -->
+        <aside class="panel sidebar">
+            <div class="panel__header">
+                <h2>Projects</h2>
+            </div>
+
+            <ul id="project-list" class="list"></ul>
+
+            <form id="add-project-form" class="form form--stack">
+                <input id="project-name-input" type="text" placeholder="New project name…" autocomplete="off" />
+                <button type="submit">Add Project</button>
+            </form>
+        </aside>
+
+        <!-- Main -->
+        <main class="panel main">
+            <div class="panel__header">
+                <h2 id="active-project-title">Inbox</h2>
+            </div>
+
+            <div class="controls">
+                <label class="control">
+                    Filter
+                    <select id="filter-select">
+                        <option value="all">All</option>
+                        <option value="today">Today</option>
+                        <option value="week">This week</option>
+                        <option value="overdue">Overdue</option>
+                    </select>
+                </label>
+
+                <label class="control">
+                    Search
+                    <input id="search-input" type="text" placeholder="Title or notes…" autocomplete="off" />
+                </label>
+
+                <label class="control control--inline">
+                    <input id="hide-completed-toggle" type="checkbox" />
+                    Hide completed
+                </label>
+
+                <label class="control">
+                    Sort
+                    <select id="sort-select">
+                        <option value="dueDate">Due date</option>
+                        <option value="priority">Priority</option>
+                        <option value="createdAt">Created</option>
+                        <option value="title">Title</option>
+                    </select>
+                </label>
+            </div>
+
+            <ul id="task-list" class="list"></ul>
+
+            <form id="add-task-form" class="form form--grid">
+                <input id="task-title-input" type="text" placeholder="New task title…" autocomplete="off" required />
+
+                <input id="task-date-input" type="date" />
+                <select id="task-priority-input">
+                    <option value="1">Priority 1</option>
+                    <option value="2" selected>Priority 2</option>
+                    <option value="3">Priority 3</option>
+                </select>
+
+                <button type="submit">Add Task</button>
+            </form>
+        </main>
+
+        <!-- Details -->
+        <aside class="panel details">
+            <div class="panel__header">
+                <h2>Details</h2>
+            </div>
+            <div id="details-content" class="details__content"></div>
+        </aside>
+    </div>
+
+    <script type="module" src="./index.js"></script>
 </body>
 
 </html>

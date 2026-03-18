@@ -1,3 +1,4 @@
+//action.js
 const createId = (prefix) => `${prefix}_${crypto.randomUUID()}`; // unique id for each task or project prefixed with p or t, private function since we aren't exporting it 
 
 export function addProject(state, name) {
@@ -177,5 +178,54 @@ export function setDefaultSort(state, sortKey) {
     const k = (sortKey ?? "").toString().trim();
     if (!ALLOWED_SORTS.has(k)) return false;
     state.settings.defaultSort = k;
+    return true;
+}
+
+
+
+// other new ones 
+
+// Toggle completed (checkbox in task list)
+export function toggleTaskCompleted(state, taskId) {
+    const tid = (taskId ?? "").toString();
+    const task = state.tasksById[tid];
+    if (!task) return false;
+    task.completed = !task.completed;
+
+    // optional: if you want completed tasks to disappear immediately when hideCompleted is on,
+    // also clear activeTaskId if it was toggled and now hidden. Not required.
+    return true;
+}
+
+// Update task fields (details panel save)
+export function updateTask(state, taskId, patch = {}) {
+    const tid = (taskId ?? "").toString();
+    const task = state.tasksById[tid];
+    if (!task) return false;
+
+    if (patch.title != null) {
+        const title = patch.title.toString().trim();
+        if (!title) return false; // enforce non-empty title
+        task.title = title;
+    }
+
+    if (patch.notes != null) {
+        task.notes = patch.notes.toString();
+    }
+
+    if ("dueDate" in patch) {
+        const d = patch.dueDate;
+        task.dueDate = d ? d.toString() : null; // allow clearing
+    }
+
+    if (patch.priority != null) {
+        const p = Number(patch.priority);
+        if (!Number.isNaN(p)) task.priority = p;
+    }
+
+    if (patch.completed != null) {
+        task.completed = Boolean(patch.completed);
+    }
+
     return true;
 }

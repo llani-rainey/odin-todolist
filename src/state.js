@@ -1,3 +1,4 @@
+//state.js
 export function createState() {
     return {
         projects: [
@@ -9,7 +10,14 @@ export function createState() {
         ],
 
         tasksById: {
-            // t1: { id:"t1", projectId:"p1", title:"...", notes:"...", dueDate:"2026-01-31", priority:2, completed:false, createdAt: 1730000000000 } //NB: 1 task to 1 project , 1 task can not be in multiple projectsafer
+            // t1: { id:"t1", 
+            // projectId:"p1", 
+            // title:"...", 
+            // notes:"...", 
+            // dueDate:"2026-01-31", 
+            // priority:2, 
+            // completed:false, 
+            // createdAt: 1730000000000 } //NB: 1 task to 1 project , 1 task can not be in multiple project (safer/easier)
         },
 
         // --- UI state (what the user is currently looking at) ---
