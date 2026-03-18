@@ -14,7 +14,7 @@ module.exports = (env, argv) => {
 
             // GitHub Pages serves your site at /<repo-name>/, not /
             // Replace YOUR_REPO_NAME with the actual repo name.
-            publicPath: isProd ? "/odin_todolist/" : "/",
+            publicPath: isProd ? "/odin-todolist/" : "/",
         },
         devServer: {
             static: "./dist",
